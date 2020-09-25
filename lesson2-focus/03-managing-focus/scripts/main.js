@@ -1,3 +1,5 @@
+var isFirstPage = true;
+
 page('/', function() {
   page.redirect('/what-is-vegemite');
 });
@@ -21,11 +23,12 @@ page('/:slug', function(context) {
 
   //if this is the first page, we don't need to manage focus
   //managing focus will begin after the user clicks something
+   
   if (isFirstPage) {
     isFirstPage = false;
     return;
   }
-
+  
   newPage.querySelector('h2').focus();
 
 });
