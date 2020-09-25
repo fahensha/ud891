@@ -25,13 +25,19 @@
 
   RadioGroup.prototype.handleKeyDown = function(e) {
     switch(e.keyCode) {
-
+      
       case VK_UP:
       case VK_LEFT: {
 
         e.preventDefault();
 
-        // This seems like a good place to do some stuff :)
+        //left or up key decreses index by 1 unless its the first index,
+        //then index wraps around to back
+        if(this.focusedIdx == 0) {
+          this.focusedIdx = this.buttons.length - 1;
+        } else {
+          this.focusedIdx--;
+        }
 
         break;
 
@@ -42,14 +48,19 @@
 
         e.preventDefault();
 
-        // This seems like a good place to do some stuff :)
+        //down or right key increases index by 1 unless its the last index,
+        //then index wraps around to front
+        if(this.focusedIdx == this.buttons.length - 1) {
+          this.focusedIdx = 0;
+        } else {
+          this.focusedIdx++;
+        }
 
         break;
       }
 
     }
-
-    this.changeFocus(this.focusedIdx); // <-- Hmm, interesting...
+    this.changeFocus(this.focusedIdx);
   };
 
   RadioGroup.prototype.changeFocus = function(idx) {
